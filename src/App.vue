@@ -6,8 +6,12 @@
 </template>
 
 <script>
+import * as API from "./api/mock.js"
 export default {
-  
+ async mounted() {
+    const test = await API.fetchProducts()
+    console.log(test);
+  }
 }
 </script>
 
