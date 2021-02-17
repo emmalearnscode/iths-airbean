@@ -12,7 +12,10 @@ export default new Vuex.Store({
     user: null,
     isLoggedIn: false,
     currentOrder: {},
-    orderDetails: null
+    orderDetails: null,
+
+    navBarIsActive:false,
+    cartIsActive:false
   },
   mutations: {
     [Mutations.SET_PRODUCTS](state, payload) {
@@ -37,7 +40,15 @@ export default new Vuex.Store({
     },
     [Mutations.SET_ORDER_HISTORY](state, payload) {
       state.orderHistory = payload
-    }
+    },
+
+    [Mutations.TOGGLE_NAVBAR](state){
+      state.navBarIsActive = !state.navBarIsActive
+    },
+
+    [Mutations.TOGGLE_CART](state){
+      state.cartIsActive = !state.cartIsActive
+    },
   },
   actions: {
     async fetchProducts({ commit }) {
@@ -71,10 +82,19 @@ export default new Vuex.Store({
 
       const orderDetails = await API.makeOrder(userId, state.currentOrder)
       commit(Mutations.SET_ORDER_DETAILS, orderDetails)
-    }
+    },
+
+    toggleNavBar({commit}){
+      commit(Mutations.TOGGLE_NAVBAR)
+    },
+    toggleCart({commit}){
+      commit(Mutations.TOGGLE_CART)
+    },
 
   },
   getters: {
-    getProducts: (state) => state.products
+    getProducts: (state) => state.products,
+    getNavBarIsActive: state => state.navBarIsActive,
+    getCartIsActive: state => state.cartIsActive,
   }
 })

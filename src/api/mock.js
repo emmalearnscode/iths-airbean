@@ -42,7 +42,11 @@ export async function registerUser(name, email) {
 
 export function userExists() {
   let users = JSON.parse(localStorage.getItem('users'))
-  return users[0]
+  if (users) {
+    return users[0]
+  }else{
+    return null
+  }
 }
 
 export async function makeOrder(userId, currentOrder) {
