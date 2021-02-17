@@ -13,10 +13,11 @@ export default {
     this.fetchProducts()
     // this.registerUser({name: 'pelle', email: 'pelle@iths.se'})
     this.checkUserExists()
+    this.makeOrder()
   },
   methods:{
 
-    ...mapActions(['fetchProducts', 'registerUser', 'checkUserExists'])
+    ...mapActions(['fetchProducts', 'checkUserExists', 'makeOrder'])
   }
 }
 </script>

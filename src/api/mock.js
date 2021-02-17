@@ -14,7 +14,6 @@ export async function fetchProducts(){
     }
       
   })
- 
   
 }
 
@@ -39,10 +38,42 @@ export function userExists(){
   
 
 
-// export async function makeOrder(userId, cardItems){
-//   // Resolve with a orderId, order total price and ETA after a random timer
-//   // Persist order coupled userId in an array in localStorage
-// }
+export async function makeOrder(userId, currentOrder){
+  // Resolve with a orderId, order total price and ETA after a random timer
+  // Persist order coupled userId in an array in localStorage
+  const orderId = uid()
+  let totalPrice = 0;
+  let estimatedTime = Math.floor((Math.random() + 1) * 10)
+  let orderArray = [...Object.values(currentOrder)];
+  console.log(userId);
+  
+  for (let product of orderArray) {
+    totalPrice += +product.price * product.amount
+   }
+
+   const response = {
+     orderId,
+     totalPrice,
+     estimatedTime
+   }
+
+   return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(response)
+    }, (Math.random() +1)* 1000);
+   })
+   
+  // const order = {
+  //   orderId
+    
+
+
+  // }
+
+
+}
+
+
 
 // export async function fetchOrderHistory(userId){
 //   // Resolve an array of orders after a random timer
