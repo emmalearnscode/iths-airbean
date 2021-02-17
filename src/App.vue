@@ -6,11 +6,17 @@
 </template>
 
 <script>
-import * as API from "./api/mock.js"
+
+import {mapActions} from 'vuex'
 export default {
- async mounted() {
-    const test = await API.fetchProducts()
-    console.log(test);
+ async created() {
+    this.fetchProducts()
+    // this.registerUser({name: 'pelle', email: 'pelle@iths.se'})
+    this.checkUserExists()
+  },
+  methods:{
+
+    ...mapActions(['fetchProducts', 'registerUser', 'checkUserExists'])
   }
 }
 </script>
