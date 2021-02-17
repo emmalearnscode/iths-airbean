@@ -7,26 +7,22 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products:[],
+    orderHistory: [],
+    products: [],
     user: null,
     isLoggedIn: false,
-    currentOrder: 
-      {"Bryggkaffe":{"id":1,"title":"Bryggkaffe","desc":"Bryggd på månadens bönor.","price":39,"amount":1},"Caffè Doppio":{"id":2,"title":"Caffè Doppio","desc":"Bryggd på månadens bönor.","price":49,"amount":1},"Cappuccino":{"id":3,"title":"Cappuccino","desc":"Bryggd på månadens bönor.","price":49,"amount":1}},
+    currentOrder: {},
     orderDetails: null
-    
-      
   },
   mutations: {
-    [Mutations.SET_PRODUCTS](state,payload){
+    [Mutations.SET_PRODUCTS](state, payload) {
       state.products = payload
     },
-    [Mutations.SET_USER](state,payload){
+    [Mutations.SET_USER](state, payload) {
       state.user = payload
-      console.log(state.user);
     },
-    [Mutations.SET_LOGGED_IN](state){
+    [Mutations.SET_LOGGED_IN](state) {
       state.isLoggedIn = true
-      console.log(state.isLoggedIn);
     },
     [Mutations.ADD_TO_CART](state, payload) {
       if (state.currentOrder[payload.title]) {
@@ -35,45 +31,50 @@ export default new Vuex.Store({
         payload.amount = 1;
         state.currentOrder[payload.title] = payload
       }
-      
     },
     [Mutations.SET_ORDER_DETAILS](state, payload) {
       state.orderDetails = payload
+    },
+    [Mutations.SET_ORDER_HISTORY](state, payload) {
+      state.orderHistory = payload
     }
   },
   actions: {
-  async fetchProducts({commit}){
-    const products = await API.fetchProducts()
-    commit(Mutations.SET_PRODUCTS, products)
-  },
-  async registerUser({commit}, payload){
-    const user = await API.registerUser(payload.name, payload.email)
-    commit(Mutations.SET_USER, user)
-    commit(Mutations.SET_LOGGED_IN)
-  },
-  checkUserExists({commit}){
-    const user = API.userExists()
-    
-    if (user) {
+    async fetchProducts({ commit }) {
+      const products = await API.fetchProducts()
+      commit(Mutations.SET_PRODUCTS, products)
+    },
+    async fetchOrderHistory({ commit }) {
+      const orderHistory = await API.fetchOrderHistory()
+
+      commit(Mutations.SET_ORDER_HISTORY, orderHistory)
+    },
+    async registerUser({ commit }, payload) {
+      const user = await API.registerUser(payload.name, payload.email)
       commit(Mutations.SET_USER, user)
       commit(Mutations.SET_LOGGED_IN)
+    },
+    checkUserExists({ commit }) {
+      const user = API.userExists()
+
+      if (user) {
+        commit(Mutations.SET_USER, user)
+        commit(Mutations.SET_LOGGED_IN)
+      }
+
+    },
+    addToCart({ commit }, payload) {
+      commit(Mutations.ADD_TO_CART, payload)
+    },
+    async makeOrder({ commit, state }) {
+      let userId = state.user.id
+
+      const orderDetails = await API.makeOrder(userId, state.currentOrder)
+      commit(Mutations.SET_ORDER_DETAILS, orderDetails)
     }
-      
+
   },
-  addToCart({commit}, payload) {
-    commit(Mutations.ADD_TO_CART, payload)
-  },
-  async makeOrder({commit, state}) {
-    let userId = null
-    if (state.isLoggedIn) {
-      userId = state.user.id
-    }
-    const orderDetails = await API.makeOrder(userId, state.currentOrder)
-    commit(Mutations.SET_ORDER_DETAILS, orderDetails)
-  }
-    
-  },
-  getters:{
+  getters: {
     getProducts: (state) => state.products
   }
 })

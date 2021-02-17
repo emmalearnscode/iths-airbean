@@ -1,30 +1,21 @@
 <template>
   <div id="app">
     <header></header>
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script>
-
-import {mapActions} from 'vuex'
+import { mapActions } from 'vuex'
 export default {
- async created() {
-    this.fetchProducts()
-    // this.registerUser({name: 'pelle', email: 'pelle@iths.se'})
-    this.checkUserExists()
-    this.makeOrder()
+  async created() {
+    await this.fetchProducts()
+    await this.checkUserExists()
   },
-  methods:{
-
-    ...mapActions(['fetchProducts', 'checkUserExists', 'makeOrder'])
-  }
+  methods: {
+    ...mapActions(['fetchProducts', 'checkUserExists']),
+  },
 }
 </script>
 
-<style lang="scss">
-
-
-
-
-</style>
+<style lang="scss"></style>
