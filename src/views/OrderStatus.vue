@@ -1,10 +1,12 @@
 <template>
   <section class="status">
     <section class="inner-wrapper">
-    <p>Ordernummer <strong>s</strong></p>
+    
+    <p v-if="orderDetails">Ordernummer <strong>{{orderDetails.orderId}}</strong></p>
     <img src="../assets/drone.svg" alt="drone carrying coffee mug">
-    <h2>Din beställning är på väg</h2>
-    <p class="large"><strong></strong> minuter</p>
+    <h2 v-if="!orderDetails">Ingen order</h2>
+    <h2 v-else>Din beställning är på väg</h2>
+    <p class="large"><strong>{{timeLeft}}</strong> minuter</p>
     <base-button @click.native="sendHome">Ok, cool!</base-button>
     <!-- <button ></button> -->
     </section>
@@ -16,9 +18,15 @@
 import BaseButton from '../components/BaseButton.vue'
 export default {
   components: { BaseButton },
+  created() {
+    this.$store.dispatch("startTimer", 12)
+  },
   computed: {
     orderDetails() {
       return this.$store.getters.getOrderDetails
+    },
+    timeLeft() {
+      return this.$store.getters.getTimeLeft
     }
   },
   methods:{
