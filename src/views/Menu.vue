@@ -5,7 +5,7 @@
       <li v-for="product in getProducts" :key="product.id">
         <button @click="addToCart(product)">Add</button>
         <h3>{{product.title}}</h3>
-        <p>{{product.price}}</p>
+        <h3>{{product.price}}</h3>
         <p>{{product.desc}}</p>
         
         

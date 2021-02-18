@@ -12,8 +12,7 @@ export default new Vuex.Store({
     user: null,
     isLoggedIn: false,
     currentOrder: {},
-    orderDetails: null,
-
+    orderDetails: null, 
     navBarIsActive:false,
     cartIsActive:false
   },
@@ -96,5 +95,15 @@ export default new Vuex.Store({
     getProducts: (state) => state.products,
     getNavBarIsActive: state => state.navBarIsActive,
     getCartIsActive: state => state.cartIsActive,
+    getOrderHistory: state => state.orderHistory,
+    getUser: state => state.user,
+    getIsLoggedIn: state => state.isLoggedIn,
+    getCurrentOrder: state => state.getCurrentOrder,
+    getOrderDetails: state => state.orderDetails,
   }
 })
+
+
+
+
+

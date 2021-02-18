@@ -9,6 +9,10 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '/',
+    redirect: "/menu"
+  },
+  {
     path: '/menu',
     name: 'Menu',
     component: Menu
