@@ -128,6 +128,7 @@ $orange: #E5674E;
     position: relative;
     width: 100%;
     max-width: 600px;
+    min-height: 100vh;
     
     background-color: $pink;
     header{
@@ -206,6 +207,7 @@ $orange: #E5674E;
       
       width: 100%;
       bottom: 0;
+      position: absolute;
       
       .footer-flower{
         width: 100%;
