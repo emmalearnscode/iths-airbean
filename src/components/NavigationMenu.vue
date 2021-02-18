@@ -3,16 +3,19 @@
     <router-link to="/menu">
       <span @click="closeNavBar">Menu</span> 
     </router-link>
+    <hr>
     
     <router-link to="/our-coffee">
       <span  @click="closeNavBar">Vårt kaffe</span>
       
     </router-link>
+    <hr>
 
     <router-link to="/my-profile">
       <span @click="closeNavBar">Min profil</span>
       
     </router-link>
+    <hr>
 
     <router-link to="/order-status">
       <span @click="closeNavBar">Orderstatus</span>
@@ -45,12 +48,21 @@ export default {
     z-index: 3;
     background-color: #2F2926;
     a{
+      font-size: 3.2rem;
       color: white;
       text-decoration: none;
       padding: 1rem;
       &:hover{
         cursor: pointer;
       }
+    }
+
+    hr {
+      width: 4rem;
+      height: 0.2px;
+      border: none;
+      background-color: #fff;
+      margin: 1rem 0;
     }
   }
 </style>

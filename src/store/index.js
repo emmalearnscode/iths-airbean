@@ -14,7 +14,9 @@ export default new Vuex.Store({
     currentOrder: {},
     orderDetails: null, 
     navBarIsActive:false,
-    cartIsActive:false
+    cartIsActive:false,
+    timeLeft: 0
+
   },
   mutations: {
     [Mutations.SET_PRODUCTS](state, payload) {
@@ -48,6 +50,10 @@ export default new Vuex.Store({
     [Mutations.TOGGLE_CART](state){
       state.cartIsActive = !state.cartIsActive
     },
+    [Mutations.SET_TIME_LEFT](state, payload) {
+      state.timeLeft = payload
+      
+    }
   },
   actions: {
     async fetchProducts({ commit }) {
@@ -76,11 +82,26 @@ export default new Vuex.Store({
     addToCart({ commit }, payload) {
       commit(Mutations.ADD_TO_CART, payload)
     },
-    async makeOrder({ commit, state }) {
+    async makeOrder({ commit, dispatch, state }) {
       let userId = state.user.id
 
       const orderDetails = await API.makeOrder(userId, state.currentOrder)
+      dispatch("startTimer", orderDetails.estimatedTime)
       commit(Mutations.SET_ORDER_DETAILS, orderDetails)
+    },
+    startTimer({commit}, payload) {
+      commit(Mutations.SET_TIME_LEFT, payload)
+      const interval = setInterval(() => {
+        if (payload > 0) {
+          payload--
+          commit(Mutations.SET_TIME_LEFT, payload)
+          
+        } else {
+          clearInterval(interval)
+        }
+      }, 6000);
+
+
     },
 
     toggleNavBar({commit}){
@@ -100,6 +121,7 @@ export default new Vuex.Store({
     getIsLoggedIn: state => state.isLoggedIn,
     getCurrentOrder: state => state.getCurrentOrder,
     getOrderDetails: state => state.orderDetails,
+    getTimeLeft: state => state.timeLeft
   }
 })
 
