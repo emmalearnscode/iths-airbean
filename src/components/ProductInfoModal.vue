@@ -1,7 +1,8 @@
 <template>
 
 <section>
-  <span class="close" @click="closeModal">x</span>
+  <img @click="closeModal" class="close" src="@/assets/close-icon.svg" alt="close button">
+  <!-- <span class="close" >x</span> -->
   <h3>{{currentProd.title}}</h3>
 <p>{{currentProd.extraInfo}}</p>
 </section>
@@ -31,7 +32,7 @@ section {
   background-color: white;
   border-radius: 5px;
   z-index: 1;
-position: absolute;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -50,15 +51,17 @@ position: absolute;
   }
 
   .close {
-    background-color: $brown;
-    padding: 1rem;
-    color: white;
-    text-transform: uppercase;
+    width: 35px;
+    height: 35px;
+    
+    background-color: #fff;
     border-radius: 50%;
+    
     position: absolute;
-    top: -10px;
-    right: -10px;
-    font-size: 1.2rem;
+    top: -15px;
+    right: -15px;
+    
+    cursor: pointer;
   }
 }
 </style>

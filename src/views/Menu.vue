@@ -4,7 +4,7 @@
     <ul>
       <li v-for="product in getProducts" :key="product.id">
         <button @click="addToCart(product)"><img src="@/assets/add.svg" alt="plus sign"></button>
-        <div @click="showExtraInfo(product)">
+        <div @click="showExtraInfo(product)" class="prod-name">
         <h3>{{product.title}}</h3>
         <p>{{product.desc}}</p>
         </div>
@@ -71,6 +71,7 @@ $brown: #2F2926;
     padding: 0.5rem;
     background-color: $brown;
     align-self: center;
+    cursor: pointer;
   }
 
   ul {
@@ -83,8 +84,13 @@ $brown: #2F2926;
     justify-content: space-between;
     margin-bottom: 2.5rem;
 
+
     p {
       margin-top: 0.3rem;
+    }
+
+    .prod-name {
+      cursor: pointer;
     }
   }
 }
