@@ -19,6 +19,7 @@
 
     <navigation-menu v-if="getNavBarIsActive" />
     <cart-modal v-if="getCartIsActive" />
+
     <router-view class="router-wrapper"></router-view>
 
     <footer>
@@ -33,12 +34,14 @@ import {mapActions} from 'vuex'
 import CartModal from '@/components/CartModal.vue'
 import NavigationMenu from '@/components/NavigationMenu.vue'
 import TheHeader from '@/components/TheHeader.vue'
+import Landing from '@/components/Landning.vue'
 
 export default {
     components:{
     NavigationMenu,
     TheHeader,
-    CartModal
+    CartModal,
+    Landing
   },
    computed:{
      currentBackground(){
