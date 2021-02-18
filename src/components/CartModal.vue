@@ -2,16 +2,18 @@
   <section>
       <div class="content-wrapper">
           <span class="triangle"></span>
-        <h1>Din beställning</h1>
+        <h1>Din beställning e här</h1>
         <base-button @click.native="sendStatus" class="black-btn">Take my money</base-button>
       </div>
-
   </section>
 </template>
 
 <script>
 import BaseButton from './BaseButton.vue'
 export default {
+  computed: {
+
+  },
   components: { BaseButton },
     methods:{
     sendStatus(){
