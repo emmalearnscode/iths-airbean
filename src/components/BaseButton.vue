@@ -16,6 +16,7 @@ export default {
         outline: none;
         padding: 0.7rem 2rem;
         width: fit-content;
+        font-family: inherit;
         font-size: 2.3rem;
         font-weight: bold;
         border-radius: 1.8rem;
