@@ -1,11 +1,19 @@
 <template>
-  <section>
-    <p>Ordernummer <strong>#12DV23F</strong></p>
-    <img src="../assets/drone.svg" alt="">
-    <h1>Din beställning är på väg</h1>
-    <p><strong>13</strong> minuter</p>
+  <section class="status">
+    <section class="inner-wrapper">
+    
+    <p v-if="orderDetails">Ordernummer <strong>{{orderDetails.orderId}}</strong></p>
+    <img src="../assets/drone.svg" alt="drone carrying coffee mug">
+    <h2 v-if="!orderDetails">Ingen order</h2>
+    <h2 v-else>Din beställning är på väg</h2>
+    <section v-if="orderDetails">
+      <p v-if="timeLeft > 1" class="large"><strong>{{timeLeft}}</strong> minuter</p>
+      <p v-if="timeLeft === 1" class="large"><strong>{{timeLeft}}</strong> minut</p>
+      <p v-if="timeLeft === 0" class="large">Order levererad!</p>
+    </section>
     <base-button @click.native="sendHome">Ok, cool!</base-button>
     <!-- <button ></button> -->
+    </section>
   </section>
 
 </template>
@@ -14,6 +22,17 @@
 import BaseButton from '../components/BaseButton.vue'
 export default {
   components: { BaseButton },
+  created() {
+    this.$store.dispatch("startTimer", 3)
+  },
+  computed: {
+    orderDetails() {
+      return this.$store.getters.getOrderDetails
+    },
+    timeLeft() {
+      return this.$store.getters.getTimeLeft
+    }
+  },
   methods:{
     sendHome(){
       this.$router.replace('/menu')
@@ -23,23 +42,31 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  section{
+  .status{
     color: white;
-    padding: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    
-    h1{
-      width: fit-content;
-    }
-
     background-color: #E5674E;
     position: absolute;
     top: 0;
     z-index: 2;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
+    display: grid;
+    place-items: center;
+
+    .inner-wrapper {
+      height: 80%; 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      align-items: center; 
+
+      h2 {
+        text-align: center;
+      }
+    }
+
+    .large {
+      font-size: 2.1rem;
+    }
   }
 </style>
