@@ -1,5 +1,6 @@
 <template>
   <div :style="{backgroundColor: currentBackground, color: currentColor}" class="app-wrapper">
+    <Landing/>
     <header>
       <img class="header-flower" src="./assets/graphics-header.svg" alt="">
     </header>
@@ -34,7 +35,7 @@ import {mapActions} from 'vuex'
 import CartModal from '@/components/CartModal.vue'
 import NavigationMenu from '@/components/NavigationMenu.vue'
 import TheHeader from '@/components/TheHeader.vue'
-import Landing from '@/components/Landning.vue'
+import Landing from '@/components/Landing.vue'
 
 export default {
     components:{
