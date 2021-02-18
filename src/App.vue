@@ -1,21 +1,6 @@
 <template>
   <div :style="{backgroundColor: currentBackground, color: currentColor}" class="app-wrapper">
-    <header>
-      <img class="header-flower" src="./assets/graphics-header.svg" alt="">
-    </header>
-
-    <the-header v-if="showHeader">
-      <template v-slot:header>
-        <div @click="toggleNav" class="nav-icon-wrapper-left cursor-pointer">
-          <!-- "require(…/assets/products/${navIconSource})" -->
-          <img :src="require(`./assets/${navIconSource}`)" alt="icon">
-        </div>
-        <div @click="toggleCart" v-if="showBagIcon" class="nav-icon-wrapper-right cursor-pointer">
-          <img src="./assets/bag.svg" alt="">
-          <span>0</span>
-        </div>
-      </template>
-    </the-header>
+    <the-header v-if="showHeader" />
 
     <navigation-menu v-if="getNavBarIsActive" />
     <cart-modal v-if="getCartIsActive" />
@@ -55,16 +40,6 @@ export default {
          return 'white'
        }
      },
-
-    navIconSource(){
-      if (this.getNavBarIsActive == true) {
-        return 'close.svg'
-      }
-      else{
-        return 'navicon.svg'
-      }
-      
-    },
     showHeader(){
         if (this.$route.path == "/order-status") {
           return false
@@ -79,15 +54,7 @@ export default {
         return false
       }
     },
-    showBagIcon(){
-      if (!this.pathIsOurCoffee && !this.getNavBarIsActive) {
-        return true
-      } else {
-        return false
-      }
-    },
-        
-        
+                
     ...mapGetters(['getNavBarIsActive', 'getCartIsActive'])
   },
 
@@ -96,13 +63,13 @@ export default {
     this.checkUserExists()
   },
   methods: {
-    toggleNav(){
-      this.toggleNavBar()
-    },
-    toggleCart(){
-      this.toggleCart()
-    },
-    ...mapActions(['fetchProducts', 'checkUserExists', 'toggleNavBar', 'toggleCart']),
+    // toggleNav(){
+    //   this.toggleNavBar()
+    // },
+    // toggleCart(){
+    //   this.toggleCart()
+    // },
+    ...mapActions(['fetchProducts', 'checkUserExists']),
   },
 }
 </script>
@@ -131,11 +98,11 @@ $orange: #E5674E;
     min-height: 100vh;
     
     background-color: $pink;
-    header{
+
       .header-flower{
         width: 100%;
       }
-    }
+
 
   h1, h2, h3, h4, h5, h6 {
     font-family: 'PT Serif', serif;
@@ -164,45 +131,7 @@ $orange: #E5674E;
     padding: 1rem;
   }
 
-    .nav-icon-wrapper-left{
-      background-color: white;
-      height: 3.5rem;
-      width: 3.5rem;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-      z-index: 6;
-      img{
-        height: 1.6rem;
-        width: 1.5rem;
-      }
-    }
-    .nav-icon-wrapper-right {
-      position: relative;
-      background-color: black;
-      padding: 1.2rem 1.5rem;
-      border-radius: 50%;
-      z-index: 1001;
-      span{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        top: 0;
-        right: 0;
-        height: 1.4rem;
-        width: 1.4rem;
-        border-radius: 50%;
-        text-align: center;
-        background-color: $orange;
-        color: white;
-      }
-    }
-    .cursor-pointer{
-      cursor: pointer;
-    }
+
     footer{
       
       width: 100%;
