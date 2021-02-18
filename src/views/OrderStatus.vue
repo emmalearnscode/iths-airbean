@@ -6,7 +6,11 @@
     <img src="../assets/drone.svg" alt="drone carrying coffee mug">
     <h2 v-if="!orderDetails">Ingen order</h2>
     <h2 v-else>Din beställning är på väg</h2>
-    <p class="large"><strong>{{timeLeft}}</strong> minuter</p>
+    <section v-if="orderDetails">
+      <p v-if="timeLeft > 1" class="large"><strong>{{timeLeft}}</strong> minuter</p>
+      <p v-if="timeLeft === 1" class="large"><strong>{{timeLeft}}</strong> minut</p>
+      <p v-if="timeLeft === 0" class="large">Order levererad!</p>
+    </section>
     <base-button @click.native="sendHome">Ok, cool!</base-button>
     <!-- <button ></button> -->
     </section>
@@ -19,7 +23,7 @@ import BaseButton from '../components/BaseButton.vue'
 export default {
   components: { BaseButton },
   created() {
-    this.$store.dispatch("startTimer", 12)
+    this.$store.dispatch("startTimer", 3)
   },
   computed: {
     orderDetails() {
