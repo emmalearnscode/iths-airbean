@@ -11,12 +11,12 @@ export default new Vuex.Store({
     products: [],
     user: null,
     isLoggedIn: false,
+    itemAmount: 0,
     currentOrder: {},
-    orderDetails: null, 
-    navBarIsActive:false,
-    cartIsActive:false,
+    orderDetails: null,
+    navBarIsActive: false,
+    cartIsActive: false,
     timeLeft: 0
-
   },
   mutations: {
     [Mutations.SET_PRODUCTS](state, payload) {
@@ -29,8 +29,10 @@ export default new Vuex.Store({
       state.isLoggedIn = true
     },
     [Mutations.ADD_TO_CART](state, payload) {
+      state.itemAmount++
       if (state.currentOrder[payload.title]) {
         state.currentOrder[payload.title].amount++;
+
       } else {
         payload.amount = 1;
         state.currentOrder[payload.title] = payload
@@ -43,16 +45,16 @@ export default new Vuex.Store({
       state.orderHistory = payload
     },
 
-    [Mutations.TOGGLE_NAVBAR](state){
+    [Mutations.TOGGLE_NAVBAR](state) {
       state.navBarIsActive = !state.navBarIsActive
     },
 
-    [Mutations.TOGGLE_CART](state){
+    [Mutations.TOGGLE_CART](state) {
       state.cartIsActive = !state.cartIsActive
     },
     [Mutations.SET_TIME_LEFT](state, payload) {
       state.timeLeft = payload
-      
+
     }
   },
   actions: {
@@ -89,13 +91,13 @@ export default new Vuex.Store({
       dispatch("startTimer", orderDetails.estimatedTime)
       commit(Mutations.SET_ORDER_DETAILS, orderDetails)
     },
-    startTimer({commit}, payload) {
+    startTimer({ commit }, payload) {
       commit(Mutations.SET_TIME_LEFT, payload)
       const interval = setInterval(() => {
         if (payload > 0) {
           payload--
           commit(Mutations.SET_TIME_LEFT, payload)
-          
+
         } else {
           clearInterval(interval)
         }
@@ -104,10 +106,10 @@ export default new Vuex.Store({
 
     },
 
-    toggleNavBar({commit}){
+    toggleNavBar({ commit }) {
       commit(Mutations.TOGGLE_NAVBAR)
     },
-    toggleCart({commit}){
+    toggleCart({ commit }) {
       commit(Mutations.TOGGLE_CART)
     },
 
@@ -119,7 +121,19 @@ export default new Vuex.Store({
     getOrderHistory: state => state.orderHistory,
     getUser: state => state.user,
     getIsLoggedIn: state => state.isLoggedIn,
-    getCurrentOrder: state => state.getCurrentOrder,
+    getCurrentOrder: state => state.currentOrder,
+    // getOrderAmount: state => {
+    //   console.log(state.currentOrder)
+    //   let amount = 0;
+    //   // Object.values(state.currentOrder).forEach(item => {
+    //   //   console.log(item)
+    //   //   amount += item.amount
+    //   // })
+
+    //   // console.log(amount)
+    //   return amount
+    // },
+    getItemAmount: state => state.itemAmount,
     getOrderDetails: state => state.orderDetails,
     getTimeLeft: state => state.timeLeft
   }

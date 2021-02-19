@@ -1,29 +1,24 @@
 <template>
   <div :style="{backgroundColor: currentBackground, color: currentColor}" class="app-wrapper">
-    <the-header v-if="showHeader" />
+    <TheHeader v-if="showHeader" />
 
-    <navigation-menu v-if="getNavBarIsActive" />
-    <cart-modal v-if="getCartIsActive" />
+    <!-- <navigation-menu v-if="getNavBarIsActive" /> -->
     <router-view class="router-wrapper"></router-view>
 
     <footer>
-      <img class="footer-flower" src="./assets/graphics-footer.svg" alt="">
+      <img class="footer-flower" src="@/assets/graphics-footer.svg" alt="">
     </footer>
   </div>
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
 import {mapActions} from 'vuex'
-import CartModal from '@/components/CartModal.vue'
-import NavigationMenu from '@/components/NavigationMenu.vue'
+// import CartModal from '@/components/CartModal.vue'
 import TheHeader from '@/components/TheHeader.vue'
 
 export default {
     components:{
-    NavigationMenu,
     TheHeader,
-    CartModal
   },
    computed:{
      currentBackground(){
@@ -55,7 +50,7 @@ export default {
       }
     },
                 
-    ...mapGetters(['getNavBarIsActive', 'getCartIsActive'])
+    // ...mapGetters(['getNavBarIsActive'])
   },
 
   async created() {
@@ -95,6 +90,7 @@ $orange: #E5674E;
     position: relative;
     width: 100%;
     max-width: 600px;
+    margin: auto;
     min-height: 100vh;
     
     background-color: $pink;
@@ -104,7 +100,7 @@ $orange: #E5674E;
       }
 
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, span {
     font-family: 'PT Serif', serif;
     font-weight: 700;
     
