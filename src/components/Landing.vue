@@ -11,18 +11,8 @@
 export default {
   data() {
     return {
-      countDown: 100,
       killMe: false,
-      intervall: true,
     };
-  },
-  watch: {
-    countDown(value) {
-      if (value < 1) {
-        this.intervall = clearInterval();
-        this.killMe = true;
-      }
-    },
   },
   created() {
     setTimeout(() => {

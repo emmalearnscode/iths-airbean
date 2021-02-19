@@ -16,11 +16,10 @@
       
     </router-link>
     <hr>
-
+    
     <router-link to="/order-status">
       <span @click="closeNavBar">Orderstatus</span>
     </router-link>
-      
   </nav>
 </template>
 

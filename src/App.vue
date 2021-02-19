@@ -4,7 +4,6 @@
     <header>
       <img class="header-flower" src="./assets/graphics-header.svg" alt="">
     </header>
-
     <the-header v-if="showHeader">
       <template v-slot:header>
         <div @click="toggleNav" class="nav-icon-wrapper-left cursor-pointer">
