@@ -45,8 +45,9 @@ export default {
     align-items: center;
     height: 100vh;
     width: 100vw;
-    z-index: 3;
+    z-index: 1;
     background-color: #2F2926;
+    
     a{
       font-size: 3.2rem;
       color: white;
