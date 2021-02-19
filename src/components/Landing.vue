@@ -1,6 +1,9 @@
 <template>
   <div class="landing" v-if="!killMe">
-    <div class="landing-wrapper"></div>
+    <div class="landing-wrapper">
+      <img src="@/assets/intro-graphic-left.svg" alt="" />
+      <img src="@/assets/intro-graphic-right.svg" alt="" />
+    </div>
   </div>
 </template>
 
@@ -10,19 +13,21 @@ export default {
     return {
       countDown: 100,
       killMe: false,
+      intervall: true,
     };
   },
   watch: {
     countDown(value) {
       if (value < 1) {
+        this.intervall = clearInterval();
         this.killMe = true;
       }
     },
   },
   created() {
-    setInterval(() => {
-      this.countDown--;
-    }, 50);
+    setTimeout(() => {
+      this.killMe = !this.killMe;
+    }, 2000);
   },
 };
 </script>
@@ -37,12 +42,21 @@ $orange: #e5674e;
   z-index: 3;
   height: 100vh;
   width: 100vw;
+  background: $dark-green;
   .landing-wrapper {
-      background: $dark-green;
-      height: 100%;
-      width: 100%;
+    background-image: url('~@/assets/airbean-landing.svg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
     p {
       color: white;
+    }
+    > img {
+      min-height: 100%;
     }
   }
 }
