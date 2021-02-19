@@ -1,6 +1,7 @@
 {
     "menu":[
       {"id":1,
+        "amount": 0,
         "title":"Bryggkaffe",
         "desc":"Bryggd på månadens bönor.",
         "price":39,
@@ -8,12 +9,14 @@
       },
       {
         "id":2,
+        "amount": 0,
         "title":"Caffè Doppio",
         "desc":"Bryggd på månadens bönor.",
         "price":49,
         "extraInfo": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed deserunt temporibus ipsa ea maxime beatae atque itaque cum perferendis nesciunt."
       },
       {"id":3,
+        "amount": 0,
         "title":"Cappuccino",
         "desc":"Bryggd på månadens bönor.",
         "price":49,
@@ -21,6 +24,7 @@
       },
       {
         "id":4,
+        "amount": 0,
         "title":"Latte Macchiato",
         "desc":"Bryggd på månadens bönor.",
         "price":49,
@@ -28,12 +32,14 @@
       },
       {
         "id":5,
+        "amount": 0,
         "title":"Kaffe Latte",
         "desc":"Bryggd på månadens bönor.",
         "price":54,
         "extraInfo": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed deserunt temporibus ipsa ea maxime beatae atque itaque cum perferendis nesciunt."
       },
       {"id":6,
+        "amount": 0,
         "title":"Cortado",
         "desc":"Bryggd på månadens bönor.",
         "price":39,
